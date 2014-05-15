@@ -1,0 +1,5 @@
+#!upstart
+description "Resque scheduler"
+respawn
+
+exec su - deploy -c 'cd <%= node['resque-scheduler']['path'] %>; VERBOSE=true RAILS_ENV=<%= node['resque-scheduler']['rails_env'] %> bundle exec rake resque:scheduler >> /var/log/resque-scheduler.log 2>&1'
