@@ -70,8 +70,8 @@ Vagrant.configure("2") do |config|
     }
 
     chef.run_list = [
-        "recipe[rails::configure]",
-        "recipe[opsworks-resque-scheduler::default]"
+        #"recipe[rails::configure]",
+        "recipe[opsworks-resque-scheduler::configure]"
     ]
   end
 end
