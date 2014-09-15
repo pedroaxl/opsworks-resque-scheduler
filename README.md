@@ -26,8 +26,8 @@ opsworks-resque-scheduler::stop
 
 It expects an array with the queues of workers to run, for example
 ```ruby
-default['resque']['path'] = "/srv/www/mailee_staging/current"
-default['resque']['rails_env'] = "preproduction"
+default['resque-scheduler']['path'] = "/srv/www/mailee_staging/current"
+default['resque-scheduler']['rails_env'] = "preproduction"
 
 ```
 
