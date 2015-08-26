@@ -7,7 +7,12 @@
 # All rights reserved - Do Not Redistribute
 #
 
-template "/etc/init/resque-scheduler.conf" do
-  source "resque-scheduler.conf.erb"
-  mode "0755"
+node[:deploy].each do |application, deploy|
+  Chef::Log.info("Configuring resque-scheduler for application #{application}")
+
+  template "/etc/init/resque-scheduler-#{application}.conf" do
+    source "resque-scheduler.conf.erb"
+    mode "0644"
+    variables application: application, deploy: deploy
+  end
 end
