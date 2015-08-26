@@ -2,6 +2,11 @@
 description "Resque scheduler"
 respawn
 
+<% @deploy[:environment].each do |k,v| %>
+env <%= k %>=<%= v %>
+export <%= k %>
+<% end %>
+
 pre-start script
 
 bash << "EOF"
@@ -11,7 +16,7 @@ EOF
 
 end script
 
-exec su - deploy -c 'cd <%= node['resque-scheduler']['path'] %>; VERBOSE=true RAILS_ENV=<%= node['resque-scheduler']['rails_env'] %> bundle exec rake resque:scheduler >> /var/log/resque/scheduler.log 2>&1'
+exec su - deploy -c 'cd <%= node['resque-scheduler']['path'] %>; VERBOSE=true RAILS_ENV=<%= node['resque-scheduler']['rails_env'] %> bundle exec rake resque:scheduler >> /var/log/resque/<%= @application %>-scheduler.log 2>&1'
 
 start on runlevel [2345]
 
